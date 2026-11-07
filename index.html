@@ -14,9 +14,9 @@
   <meta property="og:image" content="https://avsribhas.github.io/headshot.jpg">
   <meta name="twitter:card" content="summary">
 
-  <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0E0E0D" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161614'/%3E%3Cpath d='M8 38h14l4-6 4 6 5-26 6 38 4-12h11' fill='none' stroke='%23D2B45A' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#F3F0E8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B0B0A" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0B0A'/%3E%3Cpath d='M8 38h14l4-6 4 6 5-26 6 38 4-12h11' fill='none' stroke='%23F2B544' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="canonical" href="https://avsribhas.github.io/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <script>
-    // Apply a saved theme before first paint to avoid a flash.
+    document.documentElement.classList.add('js');
     try {
       var t = localStorage.getItem('theme');
       if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
@@ -35,50 +35,52 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #F6F5F1;
-      --surface: #EFEDE7;
-      --text: #161614;
-      --text-2: #57554F;
-      --text-3: #8A877F;
-      --accent: #7A6420;
-      --accent-soft: rgba(122, 100, 32, 0.10);
-      --rule: #DEDAD0;
-      --ring: rgba(22, 22, 20, 0.08);
+      --bg: #F3F0E8;
+      --surface: #EBE7DC;
+      --surface-2: #E3DED1;
+      --text: #141311;
+      --text-2: #57544C;
+      --text-3: #8C887D;
+      --accent: #B4520F;
+      --accent-soft: rgba(180, 82, 15, 0.10);
+      --rule: #DAD5C8;
+      --dot: rgba(20, 19, 17, 0.17);
 
       --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
       --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-      --max-w: 760px;
-      --label-w: 148px;
+      --max-w: 1120px;
+      --gutter: clamp(1rem, 4vw, 2.5rem);
       color-scheme: light;
     }
 
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #0E0E0D;
-        --surface: #171715;
-        --text: #ECEAE4;
-        --text-2: #A3A099;
-        --text-3: #6F6C66;
-        --accent: #D2B45A;
-        --accent-soft: rgba(210, 180, 90, 0.12);
-        --rule: #252522;
-        --ring: rgba(236, 234, 228, 0.10);
+        --bg: #0B0B0A;
+        --surface: #141412;
+        --surface-2: #1B1B18;
+        --text: #EEEBE3;
+        --text-2: #A3A097;
+        --text-3: #6D6A63;
+        --accent: #F2B544;
+        --accent-soft: rgba(242, 181, 68, 0.12);
+        --rule: #25241F;
+        --dot: rgba(238, 235, 227, 0.14);
         color-scheme: dark;
       }
     }
-
     :root[data-theme="dark"] {
-      --bg: #0E0E0D;
-      --surface: #171715;
-      --text: #ECEAE4;
-      --text-2: #A3A099;
-      --text-3: #6F6C66;
-      --accent: #D2B45A;
-      --accent-soft: rgba(210, 180, 90, 0.12);
-      --rule: #252522;
-      --ring: rgba(236, 234, 228, 0.10);
+      --bg: #0B0B0A;
+      --surface: #141412;
+      --surface-2: #1B1B18;
+      --text: #EEEBE3;
+      --text-2: #A3A097;
+      --text-3: #6D6A63;
+      --accent: #F2B544;
+      --accent-soft: rgba(242, 181, 68, 0.12);
+      --rule: #25241F;
+      --dot: rgba(238, 235, 227, 0.14);
       color-scheme: dark;
     }
 
@@ -86,7 +88,6 @@
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
       scroll-behavior: smooth;
     }
 
@@ -94,67 +95,53 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 1rem;
       line-height: 1.65;
-      font-feature-settings: 'ss01', 'cv11';
-      padding: 0 1.5rem;
-      transition: background-color .3s ease, color .3s ease;
+      transition: background-color .35s ease, color .35s ease;
+      overflow-x: hidden;
     }
 
     ::selection { background: var(--accent); color: var(--bg); }
-
     a { color: inherit; text-decoration: none; }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
     .skip {
       position: absolute; left: -9999px; top: 1rem;
       background: var(--text); color: var(--bg);
-      padding: .5rem .8rem; border-radius: 6px; font-size: .85rem;
+      padding: .5rem .8rem; border-radius: 6px; font-size: .85rem; z-index: 20;
     }
-    .skip:focus { left: 1rem; z-index: 10; }
+    .skip:focus { left: 1rem; }
 
-    .wrap {
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+    .mono { font-family: var(--mono); }
 
     /* ---------- Top bar ---------- */
 
     .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.6rem 0;
-      font-family: var(--mono);
-      font-size: .74rem;
-      letter-spacing: .02em;
-      color: var(--text-3);
+      position: absolute; inset: 0 0 auto 0; z-index: 5;
     }
+    .topbar .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1.4rem; padding-bottom: 1.4rem;
+      font-family: var(--mono); font-size: .75rem; color: var(--text-2);
+    }
+    .mark { display: inline-flex; align-items: center; gap: .55rem; }
+    .mark .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      animation: beat 2.4s ease-in-out infinite;
+    }
+    @keyframes beat { 0%, 70%, 100% { transform: scale(1); } 78% { transform: scale(1.5); } 86% { transform: scale(.9); } }
 
-    .topbar nav { display: flex; gap: 1.5rem; align-items: center; }
-    .topbar nav a { color: var(--text-2); transition: color .2s; }
+    .topbar nav { display: flex; align-items: center; gap: 1.4rem; }
+    .topbar nav a { transition: color .2s; }
     .topbar nav a:hover { color: var(--text); }
 
-    .mark {
-      display: inline-flex; align-items: center; gap: .55rem;
-      color: var(--text-2);
-    }
-    .mark .dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-soft);
-    }
-
     .theme-toggle {
-      appearance: none; border: 1px solid var(--rule); background: transparent;
-      color: var(--text-2); width: 30px; height: 30px; border-radius: 50%;
+      appearance: none; border: 1px solid var(--rule); background: color-mix(in srgb, var(--bg) 70%, transparent);
+      color: var(--text-2); width: 32px; height: 32px; border-radius: 50%;
       display: inline-grid; place-items: center; cursor: pointer;
-      transition: color .2s, border-color .2s, background-color .2s;
+      transition: color .2s, border-color .2s;
+      backdrop-filter: blur(6px);
     }
     .theme-toggle:hover { color: var(--text); border-color: var(--text-3); }
     .theme-toggle svg { width: 14px; height: 14px; }
@@ -166,469 +153,777 @@
       :root:not([data-theme="light"]) .theme-toggle .moon { display: block; }
     }
 
-    /* ---------- Hero ---------- */
+    /* ---------- Hero: excitable tissue ---------- */
 
     .hero {
-      padding: 4.5rem 0 3.25rem;
-    }
-
-    .hero-id {
+      position: relative;
+      min-height: max(620px, min(94vh, 900px));
       display: flex;
-      align-items: center;
-      gap: 1.1rem;
-      margin-bottom: 2.25rem;
+      align-items: flex-end;
+      isolation: isolate;
+      cursor: crosshair;
+      touch-action: pan-y;
+    }
+    #tissue {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      z-index: -2; display: block;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        linear-gradient(to bottom, var(--bg) 0%, transparent 110px),
+        linear-gradient(to top, var(--bg) 0%, color-mix(in srgb, var(--bg) 85%, transparent) 22%, transparent 60%),
+        linear-gradient(to right, color-mix(in srgb, var(--bg) 70%, transparent) 0%, transparent 55%);
     }
 
-    .headshot {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center 15%;
-      filter: grayscale(100%) contrast(1.05);
-      box-shadow: 0 0 0 1px var(--ring), 0 0 0 5px var(--bg), 0 0 0 6px var(--rule);
-    }
+    .hero .wrap { width: 100%; padding-bottom: clamp(3rem, 8vh, 5.5rem); pointer-events: none; }
+    .hero .wrap a, .hero .wrap button { pointer-events: auto; }
 
-    .hero-id .meta {
-      font-family: var(--mono);
-      font-size: .74rem;
-      line-height: 1.6;
-      color: var(--text-3);
+    .hint {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-family: var(--mono); font-size: .74rem; color: var(--text-2);
+      padding: .38rem .7rem; border: 1px solid var(--rule); border-radius: 999px;
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      backdrop-filter: blur(6px);
+      margin-bottom: 1.6rem;
     }
-    .hero-id .meta strong {
-      display: block;
-      font-family: var(--sans);
-      font-weight: 500;
-      font-size: .92rem;
-      color: var(--text);
-      letter-spacing: -.005em;
-    }
+    .hint .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hint .touch { display: none; }
+    @media (hover: none) { .hint .ptr { display: none; } .hint .touch { display: inline; } }
 
     h1 {
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(2.6rem, 7.2vw, 4.4rem);
-      line-height: 1.02;
-      letter-spacing: -.02em;
-      margin-bottom: 1.4rem;
+      font-size: clamp(3.2rem, 14.5vw, 9.5rem);
+      line-height: .9;
+      letter-spacing: -.035em;
+      margin-bottom: 1.6rem;
     }
-    h1 em { font-style: italic; color: var(--text-2); }
+    h1 .l2 { display: block; font-style: italic; padding-left: .55em; color: var(--accent); }
 
+    .hero-row {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+    }
     .tagline {
       font-family: var(--serif);
-      font-size: clamp(1.3rem, 2.6vw, 1.6rem);
-      line-height: 1.35;
-      color: var(--text-2);
-      max-width: 34ch;
-      margin-bottom: 2.25rem;
+      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+      line-height: 1.25;
+      max-width: 26ch;
     }
 
-    /* Action-potential trace */
-    .trace {
-      display: block;
-      width: 100%;
-      height: 56px;
-      margin: 0 0 2.25rem;
-      overflow: visible;
+    .who {
+      display: flex; align-items: center; gap: .9rem;
     }
-    .trace .base { stroke: var(--rule); }
-    .trace .spike {
-      stroke: var(--accent);
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-      animation: draw 2.4s cubic-bezier(.65,0,.35,1) .35s forwards;
+    .who img {
+      width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: center 15%;
+      filter: grayscale(100%) contrast(1.05);
+      box-shadow: 0 0 0 1px var(--rule), 0 0 0 4px var(--bg), 0 0 0 5px var(--accent);
     }
-    .trace .pulse {
-      fill: var(--accent);
-      opacity: 0;
-      animation: fade .4s ease 2.6s forwards;
-    }
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-    @keyframes fade { to { opacity: 1; } }
+    .who .links { display: flex; gap: .4rem; flex-wrap: wrap; }
 
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-    }
-    .links a {
+    .pill {
       display: inline-flex; align-items: center; gap: .4rem;
-      font-size: .86rem;
-      font-weight: 500;
-      padding: .5rem .85rem;
+      font-size: .84rem; font-weight: 500;
+      padding: .5rem .85rem; border-radius: 999px;
       border: 1px solid var(--rule);
-      border-radius: 999px;
-      color: var(--text);
-      transition: border-color .2s, background-color .2s, color .2s;
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: blur(6px);
+      transition: border-color .2s, background-color .2s, color .2s, transform .2s;
     }
-    .links a:hover {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .links a.primary {
-      background: var(--text);
-      border-color: var(--text);
-      color: var(--bg);
-    }
-    .links a.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-    .links svg { width: 13px; height: 13px; opacity: .75; }
+    .pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .pill.solid { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .pill.solid:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .pill svg { width: 12px; height: 12px; }
 
-    /* ---------- Sections ---------- */
-
-    section {
-      display: grid;
-      grid-template-columns: var(--label-w) 1fr;
-      gap: 0 2rem;
-      padding: 3rem 0;
-      border-top: 1px solid var(--rule);
+    .readout {
+      position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%);
+      font-family: var(--mono); font-size: .68rem; line-height: 1.8; color: var(--text-3);
+      text-align: right; pointer-events: none;
+      writing-mode: vertical-rl; letter-spacing: .08em; text-transform: uppercase;
     }
+    .readout b { color: var(--accent); font-weight: 500; }
 
-    .label {
-      font-family: var(--mono);
-      font-size: .72rem;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      padding-top: .3rem;
-    }
-    .label span { color: var(--accent); margin-right: .5rem; }
+    /* ---------- Premise ---------- */
 
-    .bio {
-      font-size: 1.06rem;
-      line-height: 1.75;
-      color: var(--text);
-      max-width: 62ch;
+    .premise { padding: clamp(5rem, 12vw, 9rem) 0 clamp(4rem, 9vw, 7rem); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 1.6rem;
     }
-    .bio::first-letter {
+    .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+
+    .big-quote {
       font-family: var(--serif);
-      float: left;
-      font-size: 3.6rem;
-      line-height: .9;
-      padding: .32rem .3rem 0 0;
-      color: var(--accent);
+      font-size: clamp(2rem, 5.2vw, 4.1rem);
+      line-height: 1.06;
+      letter-spacing: -.02em;
+      max-width: 22ch;
     }
+    .big-quote em { color: var(--accent); }
 
-    /* Projects */
-    .entries { display: flex; flex-direction: column; gap: .5rem; }
-
-    .entry {
-      display: block;
-      position: relative;
-      padding: 1.1rem 1.15rem 1.2rem;
-      margin: 0 -1.15rem;
-      border-radius: 12px;
-      transition: background-color .25s ease;
+    .premise-body {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      margin-top: clamp(2.5rem, 6vw, 4rem);
+      padding-top: 2rem; border-top: 1px solid var(--rule);
     }
-    a.entry:hover { background: var(--surface); }
+    .premise-body p { font-size: 1.05rem; line-height: 1.7; color: var(--text-2); max-width: 46ch; }
+    .premise-body p strong { color: var(--text); font-weight: 500; }
 
-    .entry-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: .35rem;
+    .premise-body .stance {
+      font-family: var(--serif); font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.15;
+      color: var(--text); margin-bottom: .8rem; max-width: 20ch;
     }
+    .premise-body .stance::before { content: '“'; color: var(--accent); }
+    .premise-body .stance::after { content: '”'; color: var(--accent); }
 
-    .entry-title {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      line-height: 1.2;
-      font-weight: 400;
-      letter-spacing: -.005em;
+    /* ---------- Work: bento ---------- */
+
+    .work { padding-bottom: clamp(4rem, 9vw, 7rem); }
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      margin-bottom: 1.6rem;
     }
-
-    .arrow {
-      flex: none;
-      width: 16px; height: 16px;
-      color: var(--text-3);
-      transform: translate(-3px, 3px);
-      opacity: 0;
-      transition: transform .3s cubic-bezier(.2,.7,.2,1), opacity .25s, color .25s;
+    .section-head h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1; letter-spacing: -.02em;
     }
-    a.entry:hover .arrow { opacity: 1; transform: translate(0,0); color: var(--accent); }
+    .section-head h2 em { color: var(--accent); }
+    .section-head .mono { font-size: .72rem; color: var(--text-3); }
 
-    .entry-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: .4rem .75rem;
-      font-family: var(--mono);
-      font-size: .74rem;
-      color: var(--text-3);
-      margin-bottom: .7rem;
+    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+
+    .card {
+      position: relative; display: flex; flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 1.6rem;
+      overflow: hidden;
+      transition: border-color .3s, transform .4s cubic-bezier(.2,.7,.2,1), background-color .35s;
     }
+    a.card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--rule)); transform: translateY(-3px); }
 
+    .card.wide { grid-column: span 6; display: grid; grid-template-columns: 1.05fr 1fr; gap: 2rem; padding: 2rem; }
+    .card.half { grid-column: span 3; }
+
+    .card-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem 1rem; margin-bottom: 1.1rem; }
+    .tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--mono); font-size: .7rem; color: var(--text-2);
+    }
     .badge {
       display: inline-flex; align-items: center; gap: .4rem;
-      padding: .12rem .5rem;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: .7rem;
+      font-family: var(--mono); font-size: .68rem;
+      padding: .2rem .55rem; border-radius: 999px; white-space: nowrap;
+      background: var(--accent-soft); color: var(--accent);
     }
-    .badge::before {
-      content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor;
-    }
+    .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: blink 1.8s ease-in-out infinite; }
+    @keyframes blink { 50% { opacity: .25; } }
 
-    .entry-desc {
-      font-size: .95rem;
-      line-height: 1.7;
-      color: var(--text-2);
-      max-width: 62ch;
+    .card h3 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.05; letter-spacing: -.01em;
+      margin-bottom: .8rem;
     }
-    .entry-desc strong { color: var(--text); font-weight: 500; }
+    .card.wide h3 { font-size: clamp(2rem, 4vw, 3rem); }
+    .card p { font-size: .93rem; line-height: 1.65; color: var(--text-2); }
+    .card p strong { color: var(--text); font-weight: 500; }
 
-    /* Timeline */
-    .timeline { list-style: none; }
-    .timeline li {
-      display: grid;
-      grid-template-columns: 1fr;
-      padding: 1.1rem 0;
-      border-bottom: 1px dashed var(--rule);
+    .go {
+      margin-top: auto; padding-top: 1.4rem;
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--mono); font-size: .74rem; color: var(--text);
     }
-    .timeline li:first-child { padding-top: 0; }
-    .timeline li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .go svg { width: 13px; height: 13px; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+    a.card:hover .go { color: var(--accent); }
+    a.card:hover .go svg { transform: translate(3px, -3px); }
 
-    .tl-head {
-      display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-      margin-bottom: .2rem;
+    .viz {
+      border-radius: 14px; background: var(--bg); border: 1px solid var(--rule);
+      position: relative; overflow: hidden; min-height: 240px;
     }
-    .tl-org { font-weight: 500; font-size: 1rem; letter-spacing: -.005em; }
-    .tl-when {
-      flex: none;
-      font-family: var(--mono); font-size: .72rem; color: var(--text-3);
+    .viz canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .viz .cap {
+      position: absolute; left: 12px; top: 10px; right: 12px;
+      display: flex; justify-content: space-between;
+      font-family: var(--mono); font-size: .64rem; color: var(--text-3); letter-spacing: .04em;
     }
-    .tl-role { font-size: .88rem; color: var(--text); margin-bottom: .3rem; }
-    .tl-desc { font-size: .9rem; line-height: 1.65; color: var(--text-2); max-width: 62ch; }
+    .acr { font-family: var(--mono); font-size: .76rem; color: var(--text-3); margin: -.3rem 0 .9rem; }
+    .acr b { color: var(--accent); font-weight: 500; }
 
-    /* Education */
-    .edu-name { font-family: var(--serif); font-size: 1.5rem; line-height: 1.2; margin-bottom: .3rem; }
-    .edu-meta { font-size: .9rem; color: var(--text-2); }
-    .edu-meta .mono { font-family: var(--mono); font-size: .74rem; color: var(--text-3); margin-left: .35rem; }
+    .mini-viz { height: 132px; margin: -.2rem 0 1.2rem; border-radius: 12px; background: var(--bg); border: 1px solid var(--rule); position: relative; overflow: hidden; }
+    .mini-viz svg { width: 100%; height: 100%; display: block; }
+    .venn .c { fill: none; stroke: var(--text-3); stroke-width: 1; }
+    .venn .lens { fill: var(--accent); opacity: .22; animation: lens 3.2s ease-in-out infinite; }
+    .venn text { font-family: var(--mono); font-size: 10px; fill: var(--text-3); letter-spacing: .04em; }
+    .venn text.hl { fill: var(--accent); }
+    @keyframes lens { 50% { opacity: .45; } }
 
-    /* Contact */
-    .contact-line {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      line-height: 1.2;
-      letter-spacing: -.01em;
-      margin-bottom: 1rem;
+    .term {
+      font-family: var(--mono); font-size: .8rem; line-height: 1.75; color: var(--text-2);
+      padding: 1rem 1.1rem; display: flex; flex-direction: column; justify-content: center; height: 100%;
     }
-    .contact-line a {
-      background-image: linear-gradient(var(--accent), var(--accent));
-      background-size: 100% 1px;
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      transition: color .2s, background-size .3s;
-    }
-    .contact-line a:hover { color: var(--accent); background-size: 100% 2px; }
-    .contact-sub { font-size: .9rem; color: var(--text-2); }
-    .contact-sub a { color: var(--text); border-bottom: 1px solid var(--rule); transition: border-color .2s; }
-    .contact-sub a:hover { border-color: var(--accent); }
+    .term .k { color: var(--accent); }
+    .term .c { color: var(--text-3); }
+    .caret { display: inline-block; width: .55em; height: 1em; background: var(--accent); vertical-align: -2px; animation: caret 1s steps(1) infinite; }
+    @keyframes caret { 50% { opacity: 0; } }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 2rem 0 3rem;
+    /* ---------- Before ---------- */
+
+    .before { padding-bottom: clamp(4rem, 9vw, 7rem); }
+    .before-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
       border-top: 1px solid var(--rule);
-      font-family: var(--mono);
-      font-size: .7rem;
-      color: var(--text-3);
     }
+    .stop { padding: 1.6rem 1.6rem 1.6rem 0; position: relative; }
+    .stop + .stop { padding-left: 1.6rem; border-left: 1px solid var(--rule); }
+    .stop::before {
+      content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%;
+      background: var(--bg); border: 1.5px solid var(--accent);
+    }
+    .stop + .stop::before { left: -5px; }
+    .stop .when { font-family: var(--mono); font-size: .7rem; color: var(--text-3); margin-bottom: .7rem; }
+    .stop .org { font-family: var(--serif); font-size: 1.55rem; line-height: 1.1; margin-bottom: .25rem; }
+    .stop .role { font-size: .86rem; font-weight: 500; margin-bottom: .55rem; }
+    .stop p { font-size: .86rem; line-height: 1.6; color: var(--text-2); }
+
+    .school {
+      margin-top: 1.4rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      padding: 1.1rem 1.3rem; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: .92rem; color: var(--text-2);
+    }
+    .school strong { color: var(--text); font-weight: 500; }
+    .school .mono { font-size: .7rem; color: var(--accent); margin-left: auto; }
+
+    /* ---------- Contact ---------- */
+
+    .contact { border-top: 1px solid var(--rule); padding: clamp(4.5rem, 11vw, 8rem) 0 2.5rem; position: relative; overflow: hidden; }
+    .contact h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(3rem, 10vw, 8rem); line-height: .92; letter-spacing: -.035em;
+      margin-bottom: 1.8rem;
+    }
+    .contact h2 em { color: var(--accent); }
+    .mail {
+      display: inline-flex; align-items: center; gap: .8rem;
+      font-family: var(--serif); font-size: clamp(1.5rem, 3.6vw, 2.4rem); line-height: 1.1;
+      border-bottom: 1px solid var(--accent); padding-bottom: .2rem;
+      transition: color .2s, gap .3s;
+    }
+    .mail:hover { color: var(--accent); gap: 1.1rem; }
+    .mail svg { width: .7em; height: .7em; }
+
+    .trace { display: block; width: 100%; height: 70px; margin: clamp(3rem, 7vw, 5rem) 0 1.4rem; overflow: visible; }
+    .trace .base { stroke: var(--rule); }
+    .trace .spike { stroke: var(--accent); stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .trace.on .spike { animation: draw 2.2s cubic-bezier(.65,0,.35,1) forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    footer .wrap {
+      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      font-family: var(--mono); font-size: .7rem; color: var(--text-3);
+      padding-bottom: 2.5rem;
+    }
+    footer nav { display: flex; gap: 1.2rem; }
     footer a:hover { color: var(--text); }
 
-    /* Load-in */
-    .reveal { opacity: 0; transform: translateY(8px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
-    .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; }
-    .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; }
+    /* ---------- Reveal ---------- */
+
+    .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+    .js .rv.in { opacity: 1; transform: none; }
+    .js .rv.d1 { transition-delay: .08s; } .js .rv.d2 { transition-delay: .16s; } .js .rv.d3 { transition-delay: .24s; }
+
+    .js .hero .rise { opacity: 0; transform: translateY(18px); animation: rise 1s cubic-bezier(.2,.7,.2,1) forwards; }
+    .hero .r1 { animation-delay: .1s !important; } .hero .r2 { animation-delay: .22s !important; }
+    .hero .r3 { animation-delay: .34s !important; } .hero .r4 { animation-delay: .46s !important; }
     @keyframes rise { to { opacity: 1; transform: none; } }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
+      .js .rv, .js .hero .rise { opacity: 1; transform: none; }
       .trace .spike { stroke-dashoffset: 0; }
-      .trace .pulse { opacity: 1; }
       html { scroll-behavior: auto; }
     }
 
     /* ---------- Responsive ---------- */
 
-    @media (max-width: 720px) {
-      section { grid-template-columns: 1fr; padding: 2.5rem 0; }
-      .label { margin-bottom: 1.1rem; padding-top: 0; }
-      .hero { padding: 3rem 0 2.5rem; }
-      .topbar nav .hide-sm { display: none; }
+    @media (max-width: 900px) {
+      .card.wide { grid-template-columns: 1fr; }
+      .viz { min-height: 200px; }
+      .before-grid { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid var(--rule); }
+      .stop, .stop + .stop { padding: 0 0 1.8rem 1.5rem; border-left: 0; }
+      .stop::before, .stop + .stop::before { left: -5px; top: .3rem; }
+      .readout { display: none; }
     }
-
-    @media (max-width: 480px) {
-      body { padding: 0 1rem; }
-      .entry { padding: 1rem; margin: 0 -1rem; }
-      .entry-title, .edu-name { font-size: 1.32rem; }
-      .tl-head { flex-direction: column; gap: .1rem; }
-      .bio { font-size: 1rem; }
-      .bio::first-letter { font-size: 3.1rem; }
-      .trace { height: 44px; }
-      footer { flex-direction: column; gap: .4rem; }
+    @media (max-width: 720px) {
+      .card.half { grid-column: span 6; }
+      .premise-body { grid-template-columns: 1fr; gap: 2rem; }
+      .topbar nav .hide-sm { display: none; }
+      .hero-row { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+      h1 .l2 { padding-left: .3em; }
+      .card, .card.wide { padding: 1.3rem; border-radius: 16px; }
+      .school .mono { margin-left: 0; }
     }
 
     @media print {
-      .topbar nav, .theme-toggle, .trace { display: none; }
-      body { background: #fff; color: #000; }
-      .reveal { opacity: 1; transform: none; }
+      #tissue, .hint, .readout, .theme-toggle, .trace, canvas { display: none !important; }
+      .js .rv, .js .hero .rise { opacity: 1 !important; transform: none !important; }
+      .hero { min-height: 0; padding-top: 5rem; }
     }
   </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <div class="wrap">
-
-    <header class="topbar">
+  <header class="topbar">
+    <div class="wrap">
       <a class="mark" href="#top" aria-label="Back to top"><span class="dot" aria-hidden="true"></span>avsribhas</a>
       <nav aria-label="Primary">
         <a href="#work">Work</a>
-        <a class="hide-sm" href="#previously">Previously</a>
+        <a class="hide-sm" href="#before">Before</a>
         <a href="#contact">Contact</a>
         <button class="theme-toggle" type="button" aria-label="Toggle color theme">
           <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main id="main">
+  <main id="main">
 
-      <div class="hero" id="top">
-        <div class="hero-id reveal d1">
-          <img src="headshot.jpg" alt="Portrait of Abhiram Sribhashyam" class="headshot" width="64" height="64">
-          <div class="meta">
-            <strong>Founder, Sribhashyam Labs</strong>
-            ECE · UT Austin
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="top" aria-label="Introduction">
+      <canvas id="tissue" aria-hidden="true"></canvas>
+
+      <div class="readout" aria-hidden="true">excitable medium · <span id="nCells">0</span> cells · <b id="nFiring">0</b> firing</div>
+
+      <div class="wrap">
+        <div class="hint rise r1" aria-hidden="true"><span class="pip"></span><span class="ptr">every dot is a cell — move your cursor to fire them</span><span class="touch">every dot is a cell — tap to fire them</span></div>
+
+        <h1 class="rise r2">Abhiram<span class="l2">Sribhashyam</span></h1>
+
+        <div class="hero-row rise r3">
+          <p class="tagline">I study the electrical systems of life and build computing architectures from what I find.</p>
+
+          <div class="who">
+            <img src="headshot.jpg" alt="Portrait of Abhiram Sribhashyam" width="52" height="52">
+            <div class="links">
+              <a class="pill solid" href="https://sribhashyam-labs.github.io">Sribhashyam Labs
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+              <a class="pill" href="https://github.com/avsribhas">GitHub</a>
+              <a class="pill" href="https://linkedin.com/in/abhiram-sribhashyam-525338267/">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Premise ===== -->
+    <section class="premise" aria-labelledby="premise-h">
+      <div class="wrap">
+        <div class="eyebrow rv" id="premise-h">The premise</div>
+        <p class="big-quote rv d1">The only confirmed instance of general intelligence runs on biological substrates that process information <em>electrically.</em></p>
+
+        <div class="premise-body">
+          <div class="rv">
+            <div class="eyebrow">What I do about it</div>
+            <p>I <strong>predict those network dynamics</strong>, <strong>extract the computational principles</strong>, and use them to <strong>design AI architectures</strong> that current approaches are missing.</p>
+          </div>
+          <div class="rv d1">
+            <div class="eyebrow">On alignment</div>
+            <p class="stance">Finite constraints cannot cover an infinite action space.</p>
+            <p>The alternative is engineering what the system can perceive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Work ===== -->
+    <section class="work" id="work" aria-labelledby="work-h">
+      <div class="wrap">
+        <div class="section-head rv">
+          <h2 id="work-h">What I'm <em>building</em></h2>
+          <span class="mono">2026 →</span>
+        </div>
+
+        <div class="bento">
+
+          <a class="card wide rv" href="https://sribhashyam-labs.github.io">
+            <div style="display:flex;flex-direction:column">
+              <div class="card-top">
+                <span class="tag">Founder · 2026 – present</span>
+                <span class="badge">Paper in preparation</span>
+              </div>
+              <h3>Sribhashyam Labs</h3>
+              <div class="acr"><b>N</b>etwork <b>E</b>lectrome prediction from e<b>X</b>pression <b>U</b>sing <b>S</b>imulation</div>
+              <p>Research startup. We predict biological electrical network dynamics, extract computational principles, and build AI architectures from them. Current focus: <strong>NEXUS</strong>, a foundational model for brain bioelectric dynamics from gene expression data.</p>
+              <span class="go">Visit the lab
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></span>
+            </div>
+            <div class="viz" aria-hidden="true">
+              <canvas id="channels"></canvas>
+              <div class="cap"><span>NEXUS</span><span>illustrative signal</span></div>
+            </div>
+          </a>
+
+          <a class="card half rv d1" href="alignment-paper.pdf">
+            <div class="card-top">
+              <span class="tag">Paper · 2026</span>
+              <span class="badge">In peer review</span>
+            </div>
+            <div class="mini-viz" aria-hidden="true">
+              <svg class="venn" viewBox="0 0 300 132" preserveAspectRatio="xMidYMid meet">
+                <defs><clipPath id="clipA"><circle cx="122" cy="66" r="46"/></clipPath></defs>
+                <circle class="lens" cx="178" cy="66" r="46" clip-path="url(#clipA)"/>
+                <circle class="c" cx="122" cy="66" r="46"/>
+                <circle class="c" cx="178" cy="66" r="46"/>
+                <text x="68" y="70" text-anchor="end">agent</text>
+                <text x="232" y="70" text-anchor="start">environment</text>
+                <text class="hl" x="150" y="126" text-anchor="middle">interface</text>
+              </svg>
+            </div>
+            <h3>Rethinking Alignment as Systems Architecture</h3>
+            <p>Alignment is a perceptual property of the agent-environment interface, not a property of the agent alone. Six architectural properties derived from biological systems for engineering the agent-environment relationship. Applied to the Google DeepMind AI Control Roadmap. Analyzes the July 2026 OpenAI ExploitGym and Anthropic Mythos 5 incidents as perceptual failures.</p>
+            <span class="go">Read the paper
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></span>
+          </a>
+
+          <a class="card half rv d2" href="https://github.com/avsribhas/SLM-in-Assembly">
+            <div class="card-top">
+              <span class="tag">Passion project · 2026</span>
+            </div>
+            <div class="mini-viz" aria-hidden="true">
+              <div class="term">
+                <span class="c">; a small language model</span>
+                <span class="c">; built from scratch</span>
+                <span><span class="k">target</span> ARM assembly <span class="caret"></span></span>
+              </div>
+            </div>
+            <h3>SLM in Assembly</h3>
+            <p>A small language model built from scratch in ARM assembly.</p>
+            <span class="go">See the code
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Before ===== -->
+    <section class="before" id="before" aria-labelledby="before-h">
+      <div class="wrap">
+        <div class="section-head rv">
+          <h2 id="before-h">Before <em>this</em></h2>
+          <span class="mono">2025 – 2026</span>
+        </div>
+
+        <div class="before-grid">
+          <div class="stop rv">
+            <div class="when">Summer 2025, Summer 2026</div>
+            <div class="org">Hewlett Packard Enterprise</div>
+            <div class="role">Electrical Engineering Intern</div>
+            <p>Hardware validation, PCB design (Cadence Allegro X), HPC server bring-up. On-premises LLM agents for engineering review.</p>
+          </div>
+          <div class="stop rv d1">
+            <div class="when">2025 – 2026</div>
+            <div class="org">Thena</div>
+            <div class="role">Founder, Co-CEO</div>
+            <p>AI bodyfitting app, 30 measurement points from front camera. React Native + Swift. StartupWarriors Accelerator.</p>
+          </div>
+          <div class="stop rv d2">
+            <div class="when">2025</div>
+            <div class="org">RESET Lab, UT Austin</div>
+            <div class="role">Undergraduate Research Assistant</div>
+            <p>Computer vision for jet fuel truck detection, ML plume analysis under Dr. Sergio Castellanos.</p>
           </div>
         </div>
 
-        <h1 class="reveal d2">Abhiram<br><em>Sribhashyam</em></h1>
-
-        <p class="tagline reveal d3">I study the electrical systems of life and build computing architectures from what I find.</p>
-
-        <svg class="trace reveal d4" viewBox="0 0 760 56" preserveAspectRatio="none" aria-hidden="true">
-          <line class="base" x1="0" y1="40" x2="760" y2="40" stroke-width="1" vector-effect="non-scaling-stroke"/>
-          <path class="spike" pathLength="1" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"
-            d="M0 40 H300 C312 40 316 36 322 35 C326 34 328 37 331 37 L340 4 C342 0 345 0 347 6 L356 50 C358 54 362 54 368 50 C380 43 392 40 420 40 H760"/>
-          <circle class="pulse" cx="760" cy="40" r="2.5"/>
-        </svg>
-
-        <div class="links reveal d5">
-          <a class="primary" href="https://sribhashyam-labs.github.io">Sribhashyam Labs
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
-          <a href="https://github.com/avsribhas">GitHub
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
-          <a href="https://linkedin.com/in/abhiram-sribhashyam-525338267/">LinkedIn
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
-          <a href="mailto:avsribhas@gmail.com">Email
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.5"/><path d="M2.5 4.5L8 9l5.5-4.5"/></svg></a>
+        <div class="school rv">
+          <span><strong>University of Texas at Austin</strong> — B.S. Electrical and Computer Engineering, Minor in Robotics</span>
+          <span class="mono">Expected 2028</span>
         </div>
       </div>
+    </section>
 
-      <section aria-labelledby="about-label">
-        <div class="label" id="about-label"><span>01</span>About</div>
-        <p class="bio">The only confirmed instance of general intelligence runs on biological substrates that process information electrically. I predict those network dynamics, extract the computational principles, and use them to design AI architectures that current approaches are missing. I also work on alignment, where my position is that finite constraints cannot cover an infinite action space, and the alternative is engineering what the system can perceive.</p>
-      </section>
+    <!-- ===== Contact ===== -->
+    <section class="contact" id="contact" aria-labelledby="contact-h">
+      <div class="wrap">
+        <h2 id="contact-h" class="rv">Say <em>hello.</em></h2>
+        <a class="mail rv d1" href="mailto:avsribhas@gmail.com">avsribhas@gmail.com
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
 
-      <section id="work" aria-labelledby="work-label">
-        <div class="label" id="work-label"><span>02</span>Current work</div>
-        <div class="entries">
+        <svg class="trace" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true">
+          <line class="base" x1="0" y1="50" x2="1000" y2="50" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          <path class="spike" pathLength="1" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"
+            d="M0 50 H560 C574 50 578 45 585 44 C590 43 592 47 596 47 L607 6 C609 1 613 1 615 8 L626 63 C628 68 633 68 640 63 C655 54 670 50 705 50 H1000"/>
+        </svg>
+      </div>
+    </section>
+  </main>
 
-          <a class="entry" href="https://sribhashyam-labs.github.io">
-            <div class="entry-head">
-              <h3 class="entry-title">Sribhashyam Labs</h3>
-              <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg>
-            </div>
-            <div class="entry-meta">Founder · 2026 – present <span class="badge">Paper in preparation</span></div>
-            <p class="entry-desc">Research startup. We predict biological electrical network dynamics, extract computational principles, and build AI architectures from them. Current focus: <strong>NEXUS</strong> (Network Electrome prediction from eXpression Using Simulation), a foundational model for brain bioelectric dynamics from gene expression data.</p>
-          </a>
-
-          <a class="entry" href="alignment-paper.pdf">
-            <div class="entry-head">
-              <h3 class="entry-title">Rethinking Alignment as Systems Architecture</h3>
-              <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg>
-            </div>
-            <div class="entry-meta">Paper · 2026 <span class="badge">In peer review</span></div>
-            <p class="entry-desc">Alignment is a perceptual property of the agent-environment interface, not a property of the agent alone. Six architectural properties derived from biological systems for engineering the agent-environment relationship. Applied to the Google DeepMind AI Control Roadmap. Analyzes the July 2026 OpenAI ExploitGym and Anthropic Mythos 5 incidents as perceptual failures.</p>
-          </a>
-
-          <a class="entry" href="https://github.com/avsribhas/SLM-in-Assembly">
-            <div class="entry-head">
-              <h3 class="entry-title">SLM in Assembly</h3>
-              <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg>
-            </div>
-            <div class="entry-meta">Passion project · 2026</div>
-            <p class="entry-desc">A small language model built from scratch in ARM assembly.</p>
-          </a>
-
-        </div>
-      </section>
-
-      <section id="previously" aria-labelledby="prev-label">
-        <div class="label" id="prev-label"><span>03</span>Previously</div>
-        <ul class="timeline">
-          <li>
-            <div class="tl-head"><span class="tl-org">Hewlett Packard Enterprise</span><span class="tl-when">Summer 2025, Summer 2026</span></div>
-            <div class="tl-role">Electrical Engineering Intern</div>
-            <p class="tl-desc">Hardware validation, PCB design (Cadence Allegro X), HPC server bring-up. On-premises LLM agents for engineering review.</p>
-          </li>
-          <li>
-            <div class="tl-head"><span class="tl-org">Thena</span><span class="tl-when">2025 – 2026</span></div>
-            <div class="tl-role">Founder, Co-CEO</div>
-            <p class="tl-desc">AI bodyfitting app, 30 measurement points from front camera. React Native + Swift. StartupWarriors Accelerator.</p>
-          </li>
-          <li>
-            <div class="tl-head"><span class="tl-org">RESET Lab, UT Austin</span><span class="tl-when">2025</span></div>
-            <div class="tl-role">Undergraduate Research Assistant</div>
-            <p class="tl-desc">Computer vision for jet fuel truck detection, ML plume analysis under Dr. Sergio Castellanos.</p>
-          </li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="edu-label">
-        <div class="label" id="edu-label"><span>04</span>Education</div>
-        <div>
-          <div class="edu-name">University of Texas at Austin</div>
-          <div class="edu-meta">B.S. Electrical and Computer Engineering, Minor in Robotics <span class="mono">Expected 2028</span></div>
-        </div>
-      </section>
-
-      <section id="contact" aria-labelledby="contact-label">
-        <div class="label" id="contact-label"><span>05</span>Contact</div>
-        <div>
-          <p class="contact-line"><a href="mailto:avsribhas@gmail.com">avsribhas@gmail.com</a></p>
-          <p class="contact-sub">Or find me on <a href="https://github.com/avsribhas">GitHub</a> and <a href="https://linkedin.com/in/abhiram-sribhashyam-525338267/">LinkedIn</a>.</p>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
+  <footer>
+    <div class="wrap">
       <span>&copy; 2026 Abhiram Sribhashyam</span>
-      <a href="#top">Back to top ↑</a>
-    </footer>
-
-  </div>
+      <nav aria-label="Elsewhere">
+        <a href="https://github.com/avsribhas">GitHub</a>
+        <a href="https://linkedin.com/in/abhiram-sribhashyam-525338267/">LinkedIn</a>
+        <a href="#top">Top ↑</a>
+      </nav>
+    </div>
+  </footer>
 
   <script>
-    (function () {
-      var root = document.documentElement;
-      var btn = document.querySelector('.theme-toggle');
-      var mq = window.matchMedia('(prefers-color-scheme: dark)');
-      function current() {
-        return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light');
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var darkMq = window.matchMedia('(prefers-color-scheme: dark)');
+
+    /* ---------- theme ---------- */
+    var palette = {};
+    function readPalette() {
+      var cs = getComputedStyle(root);
+      palette.dot = cs.getPropertyValue('--dot').trim();
+      palette.accent = cs.getPropertyValue('--accent').trim();
+      palette.text3 = cs.getPropertyValue('--text-3').trim();
+      palette.rule = cs.getPropertyValue('--rule').trim();
+    }
+    readPalette();
+    document.querySelector('.theme-toggle').addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme') || (darkMq.matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      readPalette(); tissue.redraw(); chans.redraw();
+    });
+    if (darkMq.addEventListener) darkMq.addEventListener('change', function () { readPalette(); tissue.redraw(); chans.redraw(); });
+
+    function hexToRgb(c) {
+      c = c.replace('#', '');
+      if (c.length === 3) c = c.split('').map(function (x) { return x + x; }).join('');
+      var n = parseInt(c, 16);
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    }
+
+    /* ---------- excitable tissue (Greenberg–Hastings on a hex lattice) ---------- */
+    var tissue = (function () {
+      var hero = document.querySelector('.hero');
+      var cv = document.getElementById('tissue');
+      var ctx = cv.getContext('2d');
+      var nCellsEl = document.getElementById('nCells');
+      var nFiringEl = document.getElementById('nFiring');
+      var W = 0, H = 0, dpr = 1, S = 22;
+      var N = 0, xs, ys, state, glow, nb, next;
+      var REFRACT = 11, P_PROP = 0.9;
+      var running = false, visible = true, lastStep = 0, STEP_MS = 62;
+      var pointer = null, lastW = 0;
+
+      function build() {
+        var r = hero.getBoundingClientRect();
+        W = r.width; H = r.height; lastW = W;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        S = W < 600 ? 19 : 22;
+        var rowH = S * 0.866;
+        var cols = Math.ceil(W / S) + 1, rows = Math.ceil(H / rowH) + 1;
+        N = cols * rows;
+        xs = new Float32Array(N); ys = new Float32Array(N);
+        state = new Uint8Array(N); next = new Uint8Array(N); glow = new Float32Array(N);
+        nb = new Int32Array(N * 6).fill(-1);
+        for (var j = 0; j < rows; j++) for (var i = 0; i < cols; i++) {
+          var k = j * cols + i;
+          xs[k] = i * S + (j & 1 ? S / 2 : 0) + (Math.random() - .5) * 2.2;
+          ys[k] = j * rowH + (Math.random() - .5) * 2.2;
+          var odd = j & 1;
+          var offs = odd ? [[-1,0],[1,0],[0,-1],[1,-1],[0,1],[1,1]] : [[-1,0],[1,0],[-1,-1],[0,-1],[-1,1],[0,1]];
+          for (var o = 0; o < 6; o++) {
+            var ii = i + offs[o][0], jj = j + offs[o][1];
+            if (ii >= 0 && ii < cols && jj >= 0 && jj < rows) nb[k * 6 + o] = jj * cols + ii;
+          }
+        }
+        nCellsEl.textContent = N.toLocaleString();
+        for (var s = 0; s < 3; s++) fire(Math.floor(Math.random() * N));
       }
-      btn.addEventListener('click', function () {
-        var next = current() === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        try { localStorage.setItem('theme', next); } catch (e) {}
+
+      function fire(k) { if (k >= 0 && k < N && state[k] === 0) { state[k] = 1; glow[k] = 1; } }
+
+      function step() {
+        var firing = 0;
+        for (var k = 0; k < N; k++) {
+          var s = state[k];
+          if (s === 0) {
+            var exc = false;
+            for (var o = 0; o < 6; o++) { var m = nb[k * 6 + o]; if (m >= 0 && state[m] === 1) { exc = true; break; } }
+            next[k] = exc && Math.random() < P_PROP ? 1 : 0;
+          } else {
+            next[k] = s >= REFRACT ? 0 : s + 1;
+          }
+        }
+        var t = state; state = next; next = t;
+        for (var q = 0; q < N; q++) {
+          if (state[q] === 1) { glow[q] = 1; firing++; } else glow[q] *= 0.83;
+        }
+        // spontaneous pacemaker events
+        if (Math.random() < 0.035) fire(Math.floor(Math.random() * N));
+        // pointer stimulation
+        if (pointer) {
+          var R = 16;
+          for (var p = 0; p < N; p++) {
+            var dx = xs[p] - pointer.x, dy = ys[p] - pointer.y;
+            if (dx * dx + dy * dy < R * R) fire(p);
+          }
+        }
+        nFiringEl.textContent = firing;
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = palette.dot;
+        ctx.beginPath();
+        for (var k = 0; k < N; k++) {
+          if (glow[k] < 0.04) { ctx.moveTo(xs[k] + 1.1, ys[k]); ctx.arc(xs[k], ys[k], 1.1, 0, 6.2832); }
+        }
+        ctx.fill();
+        var rgb = hexToRgb(palette.accent);
+        // bucket glowing cells by intensity to keep fill calls low
+        for (var b = 1; b <= 6; b++) {
+          var lo = (b - 1) / 6, hi = b / 6;
+          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (0.18 + 0.82 * hi).toFixed(3) + ')';
+          ctx.beginPath();
+          var rad = 1.1 + 2.3 * hi;
+          for (var q = 0; q < N; q++) {
+            var g = glow[q];
+            if (g >= 0.04 && g > lo && g <= hi) { ctx.moveTo(xs[q] + rad, ys[q]); ctx.arc(xs[q], ys[q], rad, 0, 6.2832); }
+          }
+          ctx.fill();
+        }
+      }
+
+      function loop(ts) {
+        if (!running) return;
+        if (ts - lastStep > STEP_MS) { step(); lastStep = ts; }
+        draw();
+        requestAnimationFrame(loop);
+      }
+      function start() { if (reduce || running || !visible || document.hidden) return; running = true; requestAnimationFrame(loop); }
+      function stop() { running = false; }
+
+      function setPointer(e) {
+        var r = cv.getBoundingClientRect();
+        pointer = { x: e.clientX - r.left, y: e.clientY - r.top };
+      }
+      hero.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') setPointer(e); });
+      hero.addEventListener('pointerleave', function () { pointer = null; });
+      hero.addEventListener('pointerdown', function (e) {
+        setPointer(e);
+        if (reduce) return;
+        var p = pointer; if (e.pointerType !== 'mouse') setTimeout(function () { if (pointer === p) pointer = null; }, 180);
       });
+
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; visible ? start() : stop(); }).observe(hero);
+      document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          if (Math.abs(hero.getBoundingClientRect().width - lastW) > 1) { build(); draw(); }
+        }, 150);
+      });
+
+      build();
+      if (reduce) {
+        // a single frozen wavefront for visual interest
+        for (var i = 0; i < 18; i++) step();
+        draw();
+      } else start();
+
+      return { redraw: function () { if (!running) draw(); } };
     })();
+
+    /* ---------- NEXUS channel traces ---------- */
+    var chans = (function () {
+      var cv = document.getElementById('channels');
+      var ctx = cv.getContext('2d');
+      var box = cv.parentElement;
+      var W, H, dpr, CH = 6, LEN = 220, buf = [], t = 0, events = [], running = false, visible = false;
+
+      function size() {
+        var r = box.getBoundingClientRect();
+        W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      for (var c = 0; c < CH; c++) { buf.push(new Float32Array(LEN)); }
+
+      function sample(c, t) {
+        var v = 0.12 * Math.sin(t * (0.07 + c * 0.013) + c * 1.7) + 0.06 * Math.sin(t * 0.31 + c) + (Math.random() - .5) * 0.07;
+        for (var e = 0; e < events.length; e++) {
+          var dt = t - (events[e] + c * 7);
+          if (dt >= 0 && dt < 14) {
+            v += dt < 3 ? dt / 3 * 1.0 : dt < 6 ? 1.0 - (dt - 3) / 3 * 1.4 : -0.4 + (dt - 6) / 8 * 0.4;
+          }
+        }
+        return v;
+      }
+      function tick() {
+        t++;
+        if (Math.random() < 0.025 || (t % 90 === 0)) events.push(t);
+        events = events.filter(function (e) { return t - e < 80; });
+        for (var c = 0; c < CH; c++) { buf[c].copyWithin(0, 1); buf[c][LEN - 1] = sample(c, t); }
+      }
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        var top = 34, lane = (H - top - 14) / CH;
+        var rgb = hexToRgb(palette.accent);
+        for (var c = 0; c < CH; c++) {
+          var y0 = top + lane * (c + 0.5);
+          ctx.strokeStyle = palette.rule; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
+          ctx.strokeStyle = 'rgba(' + rgb.join(',') + ',' + (0.55 + 0.45 * (1 - c / CH)) + ')';
+          ctx.lineWidth = 1.3; ctx.lineJoin = 'round';
+          ctx.beginPath();
+          for (var i = 0; i < LEN; i++) {
+            var x = i / (LEN - 1) * W, y = y0 - buf[c][i] * lane * 0.42;
+            i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+          }
+          ctx.stroke();
+        }
+      }
+      function loop() {
+        if (!running) return;
+        tick(); draw();
+        requestAnimationFrame(loop);
+      }
+      function start() { if (reduce || running || !visible || document.hidden) return; running = true; requestAnimationFrame(loop); }
+      function stop() { running = false; }
+
+      size();
+      for (var i = 0; i < LEN; i++) tick();
+      draw();
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; visible ? start() : stop(); }).observe(box);
+      document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+      window.addEventListener('resize', function () { size(); draw(); });
+      return { redraw: function () { draw(); } };
+    })();
+
+    /* ---------- scroll reveal ---------- */
+    var els = document.querySelectorAll('.rv, .trace');
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in', 'on'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in', 'on'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+    }
+  })();
   </script>
 </body>
 </html>
